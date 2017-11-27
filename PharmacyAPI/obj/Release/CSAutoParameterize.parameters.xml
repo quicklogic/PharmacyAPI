@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="Pharmacy-Web.config Connection String" description="Pharmacy Строка подключения в web.config, используемая приложением для доступа к базе данных." defaultValue="Server=tcp:pharmacyapiprototype123dbserver.database.windows.net,1433;Initial Catalog=PharmacyAPIPrototype123Test_db;Persist Security Info=False;User ID=KhusnutdinovAdmin;Password=RDM0oaQ1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Нияз\ Хуснутдинов\\Source\\Repos\\PharmacyAPI\\PharmacyAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Pharmacy']/@connectionString" />
+  </parameter>
+</parameters>

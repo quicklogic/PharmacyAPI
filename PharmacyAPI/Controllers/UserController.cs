@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -21,15 +22,51 @@ namespace PharmacyAPI.Controllers
             public string Password { get; set; }
         }
         // GET api/<controller>/5
-        public IQueryable<User> Get(user newuser)
+        //public IQueryable<User> Get(user newuser)
+        //{
+        //    return db.Users.Where(p => p.login == newuser.Login).Where(p => p.password == newuser.Password);
+        //}
+
+        public class AddUser
         {
-            return db.Users.Where(p => p.login == newuser.Login).Where(p => p.password == newuser.Password);
+            public string Login { get; set; }
+            public string Password { get; set; }
+            public string FirstName { get; set; }
+            public string SecondName { get; set; }
+            public string Patronomyc { get; set; }
+            public string Address { get; set; }
+            public string BornDate { get; set; }
+            public string Number { get; set; }
+            public string Mail { get; set; }
         }
-
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]AddUser user)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+           
+            User us = new User
+            {
+                login = user.Login,
+                password = user.Password
+            };
+            db.Users.Add(us);
+            UsersInfo usf = new UsersInfo
+            {
+                FirstName = user.FirstName,
+                SecondName = user.SecondName,
+                login = user.Login,
+                address = user.Address,
+                BornDate = Convert.ToDateTime(user.BornDate),
+                mail = user.Mail,
+                number = user.Number,
+                Patronomyc = user.Patronomyc
+            };
+            db.UsersInfoes.Add(usf);
+            db.SaveChanges();
+            return Ok(User);
         }
 
         // PUT api/<controller>/5
